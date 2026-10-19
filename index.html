@@ -13,30 +13,56 @@
 
     body {
       min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
-      background: #f4efe6;
-      color: #1f1a14;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: #f6f1e7;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 32px 16px;
+      background:
+        radial-gradient(900px 500px at 15% -10%, rgba(232, 122, 58, 0.28), transparent 60%),
+        radial-gradient(700px 480px at 110% 110%, rgba(90, 140, 110, 0.22), transparent 55%),
+        #141714;
+      background-size: 140% 140%;
+      animation: drift 18s ease-in-out infinite alternate;
     }
 
     main {
       width: min(640px, 100%);
-      background: #fffdf8;
-      border: 1px solid #e4d8c4;
-      border-radius: 16px;
-      padding: 40px 36px;
-      box-shadow: 0 12px 40px rgba(60, 40, 10, 0.08);
+      background: rgba(28, 31, 27, 0.86);
+      border: 1px solid rgba(246, 241, 231, 0.1);
+      border-radius: 22px;
+      padding: 44px 40px 36px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      animation: rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
     }
 
     h1 {
-      font-size: 2rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 5vw, 2.7rem);
       font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 28px;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      margin-bottom: 32px;
+      animation: fade-up 0.7s 0.15s ease both;
+    }
+
+    h1 span {
+      display: inline-block;
+      position: relative;
+    }
+
+    h1 span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0.04em;
+      width: 100%;
+      height: 0.12em;
+      background: #e87a3a;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: underline 0.6s 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
 
     ol {
@@ -51,33 +77,87 @@
       counter-increment: ideas;
       display: flex;
       align-items: center;
-      gap: 14px;
-      background: #f7f1e6;
-      border-radius: 12px;
+      gap: 16px;
+      background: rgba(246, 241, 231, 0.05);
+      border: 1px solid rgba(246, 241, 231, 0.08);
+      border-radius: 14px;
       padding: 16px 18px;
-      font-size: 1.125rem;
+      font-size: 1.08rem;
       line-height: 1.4;
+      opacity: 0;
+      animation: fade-up 0.55s ease forwards;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    li:nth-child(1) { animation-delay: 0.35s; }
+    li:nth-child(2) { animation-delay: 0.5s; }
+    li:nth-child(3) { animation-delay: 0.65s; }
+
+    li:hover {
+      transform: translateX(6px);
+      background: rgba(232, 122, 58, 0.12);
+      border-color: rgba(232, 122, 58, 0.45);
     }
 
     li::before {
       content: counter(ideas);
       flex: 0 0 auto;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: #1f1a14;
-      color: #fffdf8;
+      background: #e87a3a;
+      color: #1a120c;
       display: grid;
       place-items: center;
-      font-family: system-ui, sans-serif;
       font-size: 0.9rem;
       font-weight: 700;
+      animation: pop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+    }
+
+    li:nth-child(1)::before { animation-delay: 0.45s; }
+    li:nth-child(2)::before { animation-delay: 0.6s; }
+    li:nth-child(3)::before { animation-delay: 0.75s; }
+
+    @keyframes drift {
+      from { background-position: 0% 0%; }
+      to { background-position: 100% 40%; }
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px) scale(0.98); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes underline {
+      to { transform: scaleX(1); }
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.4); }
+      to { transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      li, h1, main, li::before, h1 span::after {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 <body>
   <main>
-    <h1>Генератор идей для постов</h1>
+    <h1>Генератор идей для <span>постов</span></h1>
     <ol>
       <li>5 идей постов для экспертов</li>
       <li>3 идеи сторис на сегодня</li>
