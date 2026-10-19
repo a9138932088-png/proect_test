@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Генератор идей для постов</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      background: #f4efe6;
+      color: #1f1a14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    main {
+      width: min(640px, 100%);
+      background: #fffdf8;
+      border: 1px solid #e4d8c4;
+      border-radius: 16px;
+      padding: 40px 36px;
+      box-shadow: 0 12px 40px rgba(60, 40, 10, 0.08);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 28px;
+    }
+
+    ol {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      counter-reset: ideas;
+    }
+
+    li {
+      counter-increment: ideas;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #f7f1e6;
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 1.125rem;
+      line-height: 1.4;
+    }
+
+    li::before {
+      content: counter(ideas);
+      flex: 0 0 auto;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #1f1a14;
+      color: #fffdf8;
+      display: grid;
+      place-items: center;
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Генератор идей для постов</h1>
+    <ol>
+      <li>5 идей постов для экспертов</li>
+      <li>3 идеи сторис на сегодня</li>
+      <li>контент план на неделю</li>
+    </ol>
+  </main>
+</body>
+</html>
